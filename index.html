@@ -251,19 +251,30 @@
   #success {
     display: none;
     text-align: center;
-    padding: 40px 20px;
+    padding: 48px 24px;
   }
   #success .icon {
-    width: 48px; height: 48px;
+    width: 52px; height: 52px;
     border-radius: 50%;
-    background: var(--accent);
+    background: #2e7d4f;
     color: #fff;
     display: flex; align-items: center; justify-content: center;
-    font-size: 24px;
-    margin: 0 auto 16px;
+    font-size: 26px;
+    margin: 0 auto 18px;
+    animation: pop-in 0.35s ease;
   }
-  #success h2 { margin: 0 0 8px; font-size: 20px; }
-  #success p { color: var(--muted); font-size: 14px; margin: 0; }
+  @keyframes pop-in {
+    0% { transform: scale(0.6); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  #success h2 { margin: 0 0 10px; font-size: 20px; color: var(--ink); }
+  #success p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 280px;
+  }
   #error-msg {
     display: none;
     background: #fdeceb;
@@ -286,6 +297,7 @@
     }
     .brand-bar img { height: 30px; }
     .brand-divider { display: none; }
+    #success { padding: 32px 16px; }
   }
 </style>
 </head>
@@ -347,12 +359,12 @@
       <button type="submit" id="submit-btn">Submit application</button>
       <div class="footnote">Your details are sent securely and reviewed by our recruitment team.</div>
     </form>
-  </div>
 
-  <div id="success">
-    <div class="icon">&#10003;</div>
-    <h2>Application received</h2>
-    <p>Thanks for applying — we'll review your details and get back to you soon.</p>
+    <div id="success">
+      <div class="icon">&#10003;</div>
+      <h2>Application received</h2>
+      <p>Thanks for applying — we'll review your details and get back to you soon.</p>
+    </div>
   </div>
 </div>
 
