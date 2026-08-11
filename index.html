@@ -182,19 +182,49 @@
     text-align: center;
     cursor: pointer;
     background: #fcfbf7;
-    transition: border-color 0.15s ease;
+    transition: border-color 0.15s ease, background 0.15s ease;
   }
   .file-drop.dragover { border-color: var(--accent); }
   .file-drop input[type="file"] { display: none; }
   .file-drop .icon { font-size: 22px; margin-bottom: 6px; }
   .file-drop .main-txt { font-size: 14px; font-weight: 500; }
   .file-drop .sub-txt { font-size: 12px; color: var(--muted); margin-top: 2px; }
-  .file-name {
-    margin-top: 10px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--accent-dark);
+  .file-drop.uploaded {
+    border-style: solid;
+    border-color: #2e7d4f;
+    background: #eef7f1;
+  }
+  .file-drop.uploaded .icon,
+  .file-drop.uploaded .main-txt,
+  .file-drop.uploaded .sub-txt { display: none; }
+  .upload-success {
     display: none;
+  }
+  .file-drop.uploaded .upload-success { display: block; }
+  .upload-success .check {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #2e7d4f;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin: 0 auto 8px;
+  }
+  .upload-success .file-name {
+    display: block;
+    margin-top: 0;
+    color: #1f5c3a;
+    font-weight: 600;
+    font-size: 13px;
+    word-break: break-all;
+  }
+  .upload-success .change-hint {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #4a8564;
   }
   button[type="submit"] {
     width: 100%;
@@ -304,7 +334,11 @@
           <div class="icon">&#128196;</div>
           <div class="main-txt">Click to upload or drag your file here</div>
           <div class="sub-txt">PDF or Word, up to 10MB</div>
-          <div class="file-name" id="file-name"></div>
+          <div class="upload-success">
+            <div class="check">&#10003;</div>
+            <div class="file-name" id="file-name"></div>
+            <div class="change-hint">Uploaded — tap to change file</div>
+          </div>
         </div>
         <div class="field-error">Attach your resume.</div>
       </div>
@@ -342,8 +376,8 @@
 
   function showFileName() {
     if (fileInput.files.length) {
-      fileNameEl.textContent = 'Selected: ' + fileInput.files[0].name;
-      fileNameEl.style.display = 'block';
+      fileNameEl.textContent = fileInput.files[0].name;
+      dropZone.classList.add('uploaded');
       document.getElementById('field-resume').classList.remove('has-error');
     }
   }
